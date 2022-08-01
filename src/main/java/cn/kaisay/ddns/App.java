@@ -51,10 +51,10 @@ public class App
                             .setFallbackHandler(RoutingHandlers::notFoundHandler))
 
                         // Redirect root path to /static to serve the index.html by default
-                        .addExactPath("/", Handlers.redirect("/static"))
+                        // .addExactPath("/", Handlers.redirect("/static"))
 
                         // Serve all static files from a folder
-                        .addPrefixPath("/static", 
+                        .addPrefixPath("/", 
                             resource(new ClassPathResourceManager(
                                             App.class.getClassLoader()))
                                             .addWelcomeFiles("public/index.html"))
