@@ -11,6 +11,7 @@ import io.undertow.util.Headers;
  */
 public class App 
 {
+    private final static  String XFO_STRING = "X-Forwarded-For ";
     public static void main(final String[] args) {
         Undertow server = Undertow.builder()
                 .addHttpListener(8080,"0.0.0.0") 
@@ -18,9 +19,9 @@ public class App
 
                     @Override
                     public void handleRequest(HttpServerExchange exchange) throws Exception {
-                        // TODO Auto-generated method stub
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
-                        exchange.getResponseSender().send("Hello World! You are requesting from "+exchange.getSourceAddress());
+                        exchange.getResponseSender().send("Hello World! You are requesting from "
+                        + (exchange.getRequestHeaders().getHeaderNames().contains(XFO_STRING) ? exchange.getRequestHeaders().getFirst(XFO_STRING) : exchange.getSourceAddress()));
                         exchange.getRequestHeaders().forEach(header -> System.out.println(header.getHeaderName()+" : "+header.toString()));
                         
                     }
