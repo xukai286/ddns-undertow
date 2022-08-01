@@ -20,8 +20,8 @@ public class App
                     public void handleRequest(HttpServerExchange exchange) throws Exception {
                         // TODO Auto-generated method stub
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
-                        exchange.getResponseSender().send("Hello World!");
-                        exchange.getRequestHeaders().forEach(header -> System.out.println(header.toString()));
+                        exchange.getResponseSender().send("Hello World! You are requesting from "+exchange.getSourceAddress());
+                        exchange.getRequestHeaders().forEach(header -> System.out.println(header.getHeaderName()+" : "+header.toString()));
                         
                     }
                     
