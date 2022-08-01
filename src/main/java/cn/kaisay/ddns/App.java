@@ -19,6 +19,8 @@ public class App
 
                     @Override
                     public void handleRequest(HttpServerExchange exchange) throws Exception {
+                        exchange.getRequestHeaders().getHeaderNames().forEach(name -> System.out.println("name is : "+name));
+                        System.out.println("x-f: "+ exchange.getRequestHeaders().getFirst(XFO_STRING));
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
                         exchange.getResponseSender().send("Hello World! You are requesting from "
                         + (exchange.getRequestHeaders().getHeaderNames().contains(XFO_STRING) ? exchange.getRequestHeaders().getFirst(XFO_STRING) : exchange.getSourceAddress()));
