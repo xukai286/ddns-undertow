@@ -33,7 +33,7 @@ public class App
                             response.put("x-forward", Boolean.FALSE.toString());
                             response.put("sourceIP", exchange.getSourceAddress().toString());                           
                         }
-                        exchange.getRequestHeaders().getHeaderNames().forEach(name -> System.out.println("name is : "+name));
+                        // exchange.getRequestHeaders().getHeaderNames().forEach(name -> System.out.println("name is : "+name));
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, " application/json");
                         exchange.getResponseSender().send(new Gson().toJson(response));                       
                     }
