@@ -4,6 +4,7 @@ import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
+import io.undertow.util.HttpString;
 
 /**
  * Hello world!
@@ -24,7 +25,7 @@ public class App
                         System.out.println("x-f checkpoint : "+ exchange.getRequestHeaders().getHeaderNames().contains(XFO_STRING) );
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
                         exchange.getResponseSender().send("Hello World! You are requesting from "
-                        + (exchange.getRequestHeaders().getHeaderNames().contains(XFO_STRING) ? exchange.getRequestHeaders().getFirst(XFO_STRING) : exchange.getSourceAddress()));
+                        + (exchange.getRequestHeaders().getHeaderNames().contains(new HttpString(XFO_STRING)) ? exchange.getRequestHeaders().getFirst(XFO_STRING) : exchange.getSourceAddress()));
                         exchange.getRequestHeaders().forEach(header -> System.out.println(header.getHeaderName()+" : "+header.toString()));
                         
                     }
