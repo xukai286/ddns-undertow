@@ -11,7 +11,7 @@ import io.undertow.util.Headers;
 import io.undertow.util.HttpString;
 
 /**
- * Hello world!
+ * DDNS Server 
  *
  */
 public class App 
@@ -33,20 +33,9 @@ public class App
                             response.put("x-forward", Boolean.FALSE.toString());
                             response.put("sourceIP", exchange.getSourceAddress().toString());                           
                         }
-                        // exchange.getRequestHeaders().forEach(header -> response.put(header.getHeaderName().toString()," : "+header.toString()));
-                        // response.put("key", "value");
-
                         exchange.getRequestHeaders().getHeaderNames().forEach(name -> System.out.println("name is : "+name));
-                        // System.out.println("x-f: "+ exchange.getRequestHeaders().getFirst(XFO_STRING));
-                        // System.out.println("x-f checkpoint : "+ exchange.getRequestHeaders().getHeaderNames().contains(XFO_STRING) );
                         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, " application/json");
-                        exchange.getResponseSender().send(new Gson().toJson(response));
-                        // exchange.getResponseSender().send("Hello World! You are requesting from "
-                        // + (exchange.getRequestHeaders().getHeaderNames().contains(new HttpString(XFO_STRING)) ? exchange.getRequestHeaders().getFirst(XFO_STRING) : exchange.getSourceAddress())
-                        // + new Gson().toJson(response));
-                        // exchange.getResponseSender().send(new Gson().toJson(exchange.getRequestHeaders()));
-                        
-                        
+                        exchange.getResponseSender().send(new Gson().toJson(response));                       
                     }
                     
                 })
