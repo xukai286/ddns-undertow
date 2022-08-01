@@ -11,7 +11,7 @@ import io.undertow.util.Headers;
  */
 public class App 
 {
-    private final static  String XFO_STRING = "X-Forwarded-For ";
+    private final static  String XFO_STRING = "X-Forwarded-For";
     public static void main(final String[] args) {
         Undertow server = Undertow.builder()
                 .addHttpListener(8080,"0.0.0.0") 
