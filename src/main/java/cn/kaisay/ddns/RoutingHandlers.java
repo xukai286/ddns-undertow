@@ -33,6 +33,6 @@ public class RoutingHandlers {
     public static void notFoundHandler(HttpServerExchange exchange) {
         exchange.setStatusCode(404);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
-        exchange.getResponseSender().send("Love Q !");
+        exchange.getResponseSender().send("Please contact xukai286@hotmail.com");
     }
 }
