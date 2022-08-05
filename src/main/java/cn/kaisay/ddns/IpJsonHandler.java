@@ -16,16 +16,20 @@ public class IpJsonHandler implements HttpHandler{
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
 
+        String ip = null;
         HashMap<String, String> response = new HashMap<String, String>();
         if (exchange.getRequestHeaders().getHeaderNames().contains(new HttpString(XFO_STRING))) {
             response.put("x-forward", Boolean.TRUE.toString());
-            response.put("sourceIP", exchange.getRequestHeaders().getFirst(XFO_STRING));
+            ip = exchange.getRequestHeaders().getFirst(XFO_STRING);
+            response.put("sourceIP", ip);
         } else {
             response.put("x-forward", Boolean.FALSE.toString());
-            response.put("sourceIP", exchange.getSourceAddress().toString());
+            ip = exchange.getSourceAddress().getAddress().getHostAddress();
+            response.put("sourceIP", ip);
         }
         // exchange.getRequestHeaders().getHeaderNames().forEach(name ->
         // System.out.println("name is : "+name));
+        new DNSHanlder().authenticate(ip);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, " application/json");
         exchange.getResponseSender().send(new Gson().toJson(response));
     }

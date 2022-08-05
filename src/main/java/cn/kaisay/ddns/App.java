@@ -13,6 +13,8 @@ import io.undertow.server.handlers.resource.ClassPathResourceManager;
  */
 public class App {
     public static void main(final String[] args) {
+/*         DNSHanlder dns = new DNSHanlder();
+        dns.authenticate(); */
         Undertow server = Undertow.builder()
                 .addHttpListener(8080, "0.0.0.0")
                 .setHandler(path()
@@ -34,6 +36,6 @@ public class App {
                 )
 
                 .build();
-        server.start();
+        server.start(); 
     }
 }
