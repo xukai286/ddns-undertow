@@ -1,5 +1,8 @@
 package cn.kaisay.ddns;
 
+import java.util.Date;
+import java.util.Random;
+
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
@@ -28,6 +31,15 @@ public class DNSHanlder {
                 .define("kaisay.cn").withExistingResourceGroup("openworld").defineARecordSet("nas")
                 .withIPv4Address(ip).withTimeToLive(3600).attach().create();
 
+/*         try {
+                double random = new Random().nextGaussian();
+                System.out.println(Thread.currentThread().getName()+" "+random+" is starting sleep "+new Date());
+                Thread.currentThread().sleep(5000L);
+                System.out.println(Thread.currentThread().getName()+" "+random+" is awake "+new Date());
+        } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        } */
         // END: readme-sample-authenticate
     }
 }

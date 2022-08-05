@@ -29,6 +29,8 @@ public class IpJsonHandler implements HttpHandler{
         }
         // exchange.getRequestHeaders().getHeaderNames().forEach(name ->
         // System.out.println("name is : "+name));
+        //Here would be start a blocking call, must dispatch to blocking thread pool, the IO thread would always be return for more throughput
+        exchange.startBlocking();
         new DNSHanlder().authenticate(ip);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, " application/json");
         exchange.getResponseSender().send(new Gson().toJson(response));

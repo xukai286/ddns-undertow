@@ -5,6 +5,7 @@ import static io.undertow.Handlers.resource;
 
 import io.undertow.Handlers;
 import io.undertow.Undertow;
+import io.undertow.server.handlers.BlockingHandler;
 import io.undertow.server.handlers.resource.ClassPathResourceManager;
 
 /**
@@ -20,7 +21,7 @@ public class App {
                 .setHandler(path()
                         // REST API path
                         .addPrefixPath("/api", Handlers.routing()
-                                .get("/ip", RoutingHandlers.IpJsonHandler())
+                                .get("/ip", new BlockingHandler(RoutingHandlers.IpJsonHandler()))
                                 // .delete("/customers/{customerId}", RoutingHandlers.IpJsonHandler())
                                 .setFallbackHandler(RoutingHandlers::notFoundHandler))
 
